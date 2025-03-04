@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void createUser(User user) {
         try (
-                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(CREATE_QUERY);
+                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(CREATE_QUERY)
         ) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
@@ -47,8 +47,8 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         try (
                 PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(SELECT_ALL_QUERY);
+                ResultSet resultSet = preparedStatement.executeQuery()
         ) {
-            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt(1));
@@ -70,17 +70,22 @@ public class UserDaoImpl implements UserDao {
     public User findUserById(int id) {
         User user = new User();
         try (
-                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(FIND_BY_ID_QUERY);
+                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(FIND_BY_ID_QUERY)
         ) {
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                user.setId(resultSet.getInt(1));
-                user.setName(resultSet.getString(2));
-                user.setSurname(resultSet.getString(3));
-                user.setAge(resultSet.getInt(4));
-                user.setUsername(resultSet.getString(5));
-                user.setPassword(resultSet.getString(6));
+            try (
+                    ResultSet resultSet = preparedStatement.executeQuery()
+            ) {
+                while (resultSet.next()) {
+                    user.setId(resultSet.getInt(1));
+                    user.setName(resultSet.getString(2));
+                    user.setSurname(resultSet.getString(3));
+                    user.setAge(resultSet.getInt(4));
+                    user.setUsername(resultSet.getString(5));
+                    user.setPassword(resultSet.getString(6));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -90,9 +95,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUsers(int age, int id) {
-        User user = new User();
         try (
-                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(UPDATE_QUERY);
+                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(UPDATE_QUERY)
         ) {
             preparedStatement.setInt(1, age);
             preparedStatement.setInt(2, id);
@@ -105,7 +109,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUserById(int id) {
         try (
-                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(DELETE_QUERY);
+                PreparedStatement preparedStatement = ConnectorDB.getConnection().prepareStatement(DELETE_QUERY)
         ) {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
