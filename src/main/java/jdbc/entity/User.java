@@ -1,13 +1,24 @@
 package jdbc.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class User {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "surname")
     private String surname;
+    @Column(name = "age")
     private int age;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
 
     public long getId() {
