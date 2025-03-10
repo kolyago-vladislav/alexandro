@@ -11,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateFactory {
     public static SessionFactory createNewSession () {
         Configuration configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(User.class); // где правильнее указывать? Здесь или в настройках в hibernate.cfg.xml?
+        configuration.addAnnotatedClass(User.class);
         StandardServiceRegistryBuilder sBuilder = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties());
         return configuration.buildSessionFactory(sBuilder.build());

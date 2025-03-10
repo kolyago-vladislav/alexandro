@@ -10,23 +10,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
     private String surname;
     @Column(name = "age")
-    private int age;
+    private Integer age;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,11 +46,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -75,7 +75,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && age == user.age && name.equals(user.name) && surname.equals(user.surname) && username.equals(user.username) && password.equals(user.password);
+        return id.equals(user.id) && name.equals(user.name) && surname.equals(user.surname) && age.equals(user.age) && username.equals(user.username) && password.equals(user.password);
     }
 
     @Override

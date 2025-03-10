@@ -34,7 +34,7 @@ public class UserRepositoryImplWithHib implements UserRepository {
     }
 
     @Override
-    public User findUserById(int id) {
+    public User findUserById(Integer id) {
         User user = new User();
         try(
                 Session newSession = HibernateFactory.createNewSession().openSession()
@@ -47,7 +47,7 @@ public class UserRepositoryImplWithHib implements UserRepository {
     }
 
     @Override
-    public void updateUserAge(int id, int age) {
+    public void updateUserAge(Integer id, Integer age) {
         try(
                 Session newSession = HibernateFactory.createNewSession().openSession()
         ) {
@@ -59,7 +59,7 @@ public class UserRepositoryImplWithHib implements UserRepository {
     }
 
     @Override
-    public void deleteUserById(int id) {
+    public void deleteUserById(Integer id) {
         try(
                 Session newSession = HibernateFactory.createNewSession().openSession()
         ) {
