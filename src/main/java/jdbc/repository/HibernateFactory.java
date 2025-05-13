@@ -1,25 +1,16 @@
 package jdbc.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jdbc.entity.User;
+import jdbc.config.JavaConfig;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HibernateFactory {
     public static SessionFactory createNewSession () {
-        Configuration configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(User.class);
-        StandardServiceRegistryBuilder sBuilder = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties());
-        return configuration.buildSessionFactory(sBuilder.build());
+
+            return new org.hibernate.cfg.Configuration()
+                    .addProperties(JavaConfig.hibernateConfig())
+                    .buildSessionFactory();
     }
 
-    public static EntityManager createNewEntityManager () {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA-persistence");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return entityManager;
-    }
 }

@@ -3,9 +3,12 @@ package jdbc.repository;
 import jdbc.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserRepositoryImplWithHib implements UserRepository {
 
     @Override
