@@ -1,6 +1,6 @@
 package jdbcTest.entityTest;
 
-import jdbc.entity.User;
+import jdbc.model.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,11 +1,10 @@
-package jdbc.entity;
+package jdbc.model;
 
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
-@Component("user")
+@Component
 @Entity
 @Table(name = "users")
 public class User {

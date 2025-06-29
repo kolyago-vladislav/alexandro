@@ -1,8 +1,8 @@
 package jdbc.service;
 
-import jdbc.entity.User;
-import jdbc.repository.UserRepository;
+import jdbc.model.User;
 import jdbc.repository.UserRepositoryImplWithHib;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,34 +10,36 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private UserRepositoryImplWithHib userRepositoryImplWithHib;
+
+    @Autowired
+    public void setUserRepositoryImplWithHib(UserRepositoryImplWithHib userRepositoryImplWithHib) {
+        this.userRepositoryImplWithHib = userRepositoryImplWithHib;
+    }
+
     @Override
     public void createUser(User user) {
-        UserRepository userRepository = new UserRepositoryImplWithHib();
-        userRepository.createUser(user);
+        this.userRepositoryImplWithHib.createUser(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        UserRepository userRepository = new UserRepositoryImplWithHib();
-        return userRepository.selectAllUsers();
+        return this.userRepositoryImplWithHib.selectAllUsers();
     }
 
     @Override
     public User getUserById(Integer id) {
-        UserRepository userRepository = new UserRepositoryImplWithHib();
-        return userRepository.findUserById(id);
+        return this.userRepositoryImplWithHib.findUserById(id);
     }
 
     @Override
     public void updateUserAge(Integer id, Integer age) {
-        UserRepository userRepository = new UserRepositoryImplWithHib();
-        userRepository.updateUserAge(id, age);
+        this.userRepositoryImplWithHib.updateUserAge(id, age);
     }
 
     @Override
     public void deleteUserById(Integer id) {
-        UserRepository userRepository = new UserRepositoryImplWithHib();
-        userRepository.deleteUserById(id);
+        this.userRepositoryImplWithHib.deleteUserById(id);
     }
 
 }
