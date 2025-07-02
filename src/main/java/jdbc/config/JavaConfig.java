@@ -1,6 +1,5 @@
 package jdbc.config;
 
-import jdbc.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,17 +20,6 @@ public class JavaConfig {
     private final String hibernateDialect = "org.hibernate.dialect.PostgreSQLDialect";
     private final String hibernateShowSql = "true";
     private final String hibernateHbm2ddlAuto = "update";
-
-    @Bean
-    public User user() {
-        User user = new User();
-        user.setName("Alexxx");
-        user.setSurname("Pilpuk");
-        user.setAge(24);
-        user.setUsername("sgd");
-        user.setPassword("segxfg");
-        return user;
-    }
 
     @Bean
     public DataSource dataSource() {
