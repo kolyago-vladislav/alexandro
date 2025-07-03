@@ -1,6 +1,6 @@
 package jdbc.repository;
 
-import jdbc.model.User;
+import jdbc.entity.User;
 import java.util.List;
 
 public interface UserRepository {

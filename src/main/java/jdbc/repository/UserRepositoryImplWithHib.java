@@ -3,7 +3,7 @@ package jdbc.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jdbc.model.User;
+import jdbc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -13,7 +13,6 @@ public class UserRepositoryImplWithHib implements UserRepository {
 
     private EntityManagerFactory entityManagerFactory;
 
-    @Autowired
     public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }

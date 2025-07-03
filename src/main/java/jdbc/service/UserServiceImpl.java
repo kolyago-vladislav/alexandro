@@ -1,6 +1,6 @@
 package jdbc.service;
 
-import jdbc.model.User;
+import jdbc.entity.User;
 import jdbc.repository.UserRepositoryImplWithHib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,6 @@ public class UserServiceImpl implements UserService {
 
     private UserRepositoryImplWithHib userRepositoryImplWithHib;
 
-    @Autowired
     public void setUserRepositoryImplWithHib(UserRepositoryImplWithHib userRepositoryImplWithHib) {
         this.userRepositoryImplWithHib = userRepositoryImplWithHib;
     }
