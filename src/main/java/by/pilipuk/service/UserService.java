@@ -1,14 +1,13 @@
-package jdbc.service;
+package by.pilipuk.service;
 
-import jdbc.entity.User;
-import jdbc.repository.UserRepository;
+import by.pilipuk.entity.User;
+import by.pilipuk.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService {
 
     private UserRepository userRepository;
 
@@ -16,27 +15,22 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
     public void createUser(User user) {
         this.userRepository.save(user);
     }
 
-    @Override
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
 
-    @Override
-    public User getUserById(Long id) {
-        return (User) this.userRepository.findAllById(Collections.singleton(id));
+    public Optional<User> getUserById(Long id) {
+        return this.userRepository.findById(id);
     }
 
-    @Override
-    public void updateUserAge(User user) {
+    public void updateUser(User user) {
         this.userRepository.save(user);
     }
 
-    @Override
     public void deleteUserById(Long id) {
         this.userRepository.deleteById(id);
     }

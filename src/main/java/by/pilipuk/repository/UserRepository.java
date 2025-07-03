@@ -1,6 +1,6 @@
-package jdbc.repository;
+package by.pilipuk.repository;
 
-import jdbc.entity.User;
+import by.pilipuk.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

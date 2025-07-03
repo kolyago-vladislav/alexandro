@@ -1,4 +1,4 @@
-package jdbc.entity;
+package by.pilipuk.entity;
 
 import jakarta.persistence.*;
 
