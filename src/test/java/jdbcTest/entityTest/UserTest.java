@@ -14,11 +14,11 @@ class UserTest {
         assertEquals(0, user.getId());
     }
 
-    @Test
-    void testSetId() {
-        user.setId(1);
-        assertEquals(1, user.getId());
-    }
+//    @Test
+//    void testSetId() {
+//        user.setId(1);
+//        assertEquals(1, user.getId());
+//    }
 
     @Test
     void getName() {

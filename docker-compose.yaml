@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgis/postgis:10-2.5-alpine
+    image: postgis/postgis:12-2.5-alpine
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

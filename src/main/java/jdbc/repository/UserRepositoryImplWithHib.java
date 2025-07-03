@@ -1,20 +1,30 @@
 package jdbc.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jdbc.entity.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
+@Repository
 public class UserRepositoryImplWithHib implements UserRepository {
+
+    private EntityManagerFactory entityManagerFactory;
+
+    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     @Override
     public void createUser(User user) {
         try(
-                Session newSession = HibernateFactory.createNewSession().openSession()
+                EntityManager entityManager = this.entityManagerFactory.createEntityManager();
                 ) {
-            Transaction transaction = newSession.beginTransaction();
-            newSession.persist(user);
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.persist(user);
             transaction.commit();
         }
 
@@ -22,12 +32,13 @@ public class UserRepositoryImplWithHib implements UserRepository {
 
     @Override
     public List<User> selectAllUsers() {
-        List<User> userList = new ArrayList<>();
+        List<User> userList;
         try(
-                Session newSession = HibernateFactory.createNewSession().openSession()
+                EntityManager entityManager = this.entityManagerFactory.createEntityManager();
         ) {
-            Transaction transaction = newSession.beginTransaction();
-            userList = newSession.createQuery("FROM User", User.class).getResultList();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            userList = entityManager.createQuery("FROM User", User.class).getResultList();
             transaction.commit();
         }
         return userList;
@@ -35,12 +46,13 @@ public class UserRepositoryImplWithHib implements UserRepository {
 
     @Override
     public User findUserById(Integer id) {
-        User user = new User();
+        User user;
         try(
-                Session newSession = HibernateFactory.createNewSession().openSession()
+                EntityManager entityManager = this.entityManagerFactory.createEntityManager();
         ) {
-            Transaction transaction = newSession.beginTransaction();
-            user = newSession.get(User.class, id);
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            user = entityManager.find(User.class, id);
             transaction.commit();
         }
         return user;
@@ -49,10 +61,11 @@ public class UserRepositoryImplWithHib implements UserRepository {
     @Override
     public void updateUserAge(Integer id, Integer age) {
         try(
-                Session newSession = HibernateFactory.createNewSession().openSession()
+                EntityManager entityManager = this.entityManagerFactory.createEntityManager();
         ) {
-            Transaction transaction = newSession.beginTransaction();
-            User user = newSession.get(User.class, id);
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            User user = entityManager.find(User.class, id);
             user.setAge(age);
             transaction.commit();
         }
@@ -61,11 +74,12 @@ public class UserRepositoryImplWithHib implements UserRepository {
     @Override
     public void deleteUserById(Integer id) {
         try(
-                Session newSession = HibernateFactory.createNewSession().openSession()
+                EntityManager entityManager = this.entityManagerFactory.createEntityManager();
         ) {
-            Transaction transaction = newSession.beginTransaction();
-            User user = newSession.get(User.class, id);
-            newSession.remove(user);
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            User user = entityManager.find(User.class, id);
+            entityManager.remove(user);
             transaction.commit();
         }
     }
