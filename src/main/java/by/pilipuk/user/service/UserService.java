@@ -1,7 +1,7 @@
-package by.pilipuk.service;
+package by.pilipuk.user.service;
 
-import by.pilipuk.entity.User;
-import by.pilipuk.repository.UserRepository;
+import by.pilipuk.user.entity.User;
+import by.pilipuk.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

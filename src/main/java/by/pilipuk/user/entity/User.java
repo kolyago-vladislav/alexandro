@@ -1,4 +1,4 @@
-package by.pilipuk.entity;
+package by.pilipuk.user.entity;
 
 import jakarta.persistence.*;
 
