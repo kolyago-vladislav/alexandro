@@ -11,7 +11,7 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public void setUserRepository(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
