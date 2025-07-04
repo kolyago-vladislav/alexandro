@@ -11,7 +11,7 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public void setUserRepository(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -27,8 +27,14 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
-    public void updateUser(User user) {
-        this.userRepository.save(user);
+    public void updateUser(Long id, User user) {
+        User user1 = this.userRepository.findById(id).orElse(null);
+        user1.setName(user.getName());
+        user1.setSurname(user.getSurname());
+        user1.setAge(user.getAge());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        this.userRepository.save(user1);
     }
 
     public void deleteUserById(Long id) {
